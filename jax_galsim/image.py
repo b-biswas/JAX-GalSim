@@ -269,6 +269,8 @@ class Image(object):
                 raise TypeError("wcs parameters must be a galsim.BaseWCS instance")
             self.wcs = wcs
 
+        self._dtype = self._array.dtype.type
+
     @staticmethod
     def _get_xmin_ymin(array, kwargs, check_bounds=True):
         """A helper function for parsing xmin, ymin, bounds options with a given array"""
@@ -1291,7 +1293,7 @@ class Image(object):
         obj._array = children[0]
         obj.wcs = children[1]
         obj._bounds = children[2]
-        obj._dtype = aux_data["dtype"]
+        obj._dtype = obj._array.dtype.type
         obj._is_const = aux_data["isconst"]
         if len(children) > 3:
             obj.added_flux = children[3]
