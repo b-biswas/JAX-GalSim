@@ -269,6 +269,7 @@ class Image(object):
                 raise TypeError("wcs parameters must be a galsim.BaseWCS instance")
             self.wcs = wcs
 
+        # make sure they are always consistent even when user specifies unavailable dtype
         self._dtype = self._array.dtype.type
 
     @staticmethod

@@ -1,3 +1,4 @@
+import jax
 import jax.numpy as jnp
 import numpy as np
 import pytest
@@ -76,3 +77,13 @@ def test_drawkimage_image_kwarg_dtype(dtype):
     for im in (image_in, kim):
         assert im.dtype == dtype
         assert im.array.dtype == dtype
+
+
+@pytest.mark.test_in_float32
+def test_image_and_array_dtype_are_always_consistent():
+    image = jax_galsim.Image(2, 2, dtype=jnp.float64)
+    assert image.dtype == image.array.dtype.type
+
+    leaves, treedef = jax.tree_util.tree_flatten(image)
+    rebuilt = jax.tree_util.tree_unflatten(treedef, leaves)
+    assert rebuilt.dtype == rebuilt.array.dtype.type
