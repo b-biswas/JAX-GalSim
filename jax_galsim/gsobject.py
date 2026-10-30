@@ -989,7 +989,7 @@ The JAX-GalSim version of ``drawImage``
     @implements(
         _galsim.GSObject.drawKImage,
         lax_description="""\
-The JAX-GalSim version of ``drawKImage`` accepts an extra ``dtype`` to set 
+The JAX-GalSim version of ``drawKImage`` accepts an extra ``dtype`` to set
 the complex dtype of k-space-image when ``image`` is not provided
 (e.g. ``numpy.complex64``). If ``dtype`` is None, it defaults to ``complex128``
 when ``jax_enable_x64`` is enabled and ``complex64`` otherwise.
