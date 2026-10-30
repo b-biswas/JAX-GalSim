@@ -961,9 +961,15 @@ class Image(object):
         # inplace FFT. Thus we do not use the
         # padding.
 
+        # Use float32 for complex64 input, float64 for complex128 input
+        if self.dtype == jnp.complex64:
+            ifft_dtype = jnp.float32
+        else:
+            ifft_dtype = jnp.float64
+
         out = Image(
             bounds=BoundsI(xmin=-No2, deltax=2 * No2, ymin=-No2, deltay=2 * No2),
-            dtype=float,
+            dtype=ifft_dtype,
             scale=dx,
             # we shift the image before and after the FFT to match the layout used by galsim
             array=jnp.fft.fftshift(
