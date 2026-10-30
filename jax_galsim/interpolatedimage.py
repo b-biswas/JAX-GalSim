@@ -634,8 +634,8 @@ class _InterpolatedImageImpl(GSObject):
                 "InterpolatedImages do not support 'depixelize' in jax_galsim."
             )
         else:
-            # Preserve the input dtype
-            image = self._jax_children[0].copy()
+            # This does not preserve the input dtype to maintain consistency with Galsim
+            image = self._jax_children[0].copy(dtype=float)
 
         if self._jax_aux_data["_recenter_image"]:
             image.setCenter(0, 0)
